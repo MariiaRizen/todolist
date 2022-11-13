@@ -5,8 +5,6 @@ from datetime import datetime
 from helpers import json_read_write
 
 
-
-
 functions_list = {
     1: 'show_possible_actions',
     2: 'show_all_tasks',
@@ -32,13 +30,13 @@ def main():
     file_path = os.path.join(os.getcwd(), 'data', 'tasks.json')
     if os.path.isfile(file_path) is True:
         functionality.todo_list = json_read_write.read_todo_list_json()
+    print('Possible actions')
+    for action_id, task_name in functions_list.items():
+        print(f'{action_id}: {task_name}')
 
     while True:
-        sleep(5)
-        os.system('cls')
-        print('Possible actions')
-        for action_id, task_name in functions_list.items():
-            print(f'{action_id}: {task_name}')
+        #sleep(5)
+        #os.system('cls')
 
         action_id = int(input('please choose action: '))
         if action_id == 1:
@@ -55,12 +53,12 @@ def main():
             due_date_s = input('please enter due date in next format yyyy-mm-dd: ')
             due_date_d = datetime.strptime(due_date_s, '%Y-%m-%d')
             functionality.add_entry(
-                title=title,
-                description=description,
-                priority=priority,
-                due_date=due_date_d
+                ftitle=title,
+                fdescription=description,
+                fpriority=priority,
+                fdue_date=due_date_d
             )
-            print('Entry was succesfully added')
+            print('Entry was successfully added')
 
         if action_id == 4:
             query = input('please enter search query: ')
@@ -102,11 +100,11 @@ def main():
             functionality.save_as_csv_file()
 
         if action_id == 15:
-            functionality.downlad_test_data()
+            functionality.download_test_data()
 
         if action_id == 16:
             json_read_write.write_todo_list_json()
-            break
+            # break
 
 
 if __name__ == '__main__':
