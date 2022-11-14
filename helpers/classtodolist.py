@@ -10,15 +10,14 @@ class Task:
         self.due_date = due_date
         self.done = done
 
-
     def done_task(self):
         self.done = True
-        return self.done
 
-    def change_priority(self,new_priority):
-        #new_priority = input('Write new priority: ')
-        self.priority = new_priority
-        return new_priority
+    def change_priority(self, new_priority):
+        if 1 <= new_priority <= 10:
+            self.priority = new_priority
+        else:
+            print('Please write correct number for 1 to 10')
 
     def to_dict(self):
         return {
@@ -30,9 +29,6 @@ class Task:
             'done':self.done
         }
 
-
-my_test = Task(1, "Buy book", "Psychological book", 3,datetime(2022,11,23), False)
-print()
 
 if __name__ == '__main__':
     print(my_test.change_priority())
