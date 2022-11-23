@@ -15,10 +15,7 @@ def add_entry(
         fpriority: int = 1,
 ):
     """ add new entry"""
-    if todo_list:
-        new_id = max([x.id for x in todo_list]) + 1
-    else:
-        new_id = 1
+    new_id = len(todo_list) + 1
     task_o = Task(
         id=new_id,
         title=ftitle,
@@ -107,7 +104,7 @@ def show_title_for_finished():
 
 def show_title_time_off():
     """ View overdue cases (titles only)"""
-    time_off_list = [x.title for x in todo_list if x.due_date < datetime.now()]
+    time_off_list = [x.title for x in todo_list if x.done == False and x.due_date < datetime.now()]
     print(time_off_list)
 
 
